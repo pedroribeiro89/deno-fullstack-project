@@ -16,7 +16,7 @@ async function serveHttp(conn: Deno.Conn) {
     for await (const requestEvent of httpConn) {
         let response;
         try {
-            response = app.handle(requestEvent.request); //new Response('ok', { status: 200, })
+            response = app.handle(requestEvent.request);
         } catch (error: any) {
             response = new Response(error, { status: 404, })
         }
