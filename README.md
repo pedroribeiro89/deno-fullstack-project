@@ -17,4 +17,5 @@ Rest API for CRUD of tasks, organized in layers:
 ```
 
 ## Frontend
-TODO
+
+Super simple CRUD for the kanban, using fresh

@@ -1,4 +1,4 @@
-import {TaskRepository} from "../repository/task-repository.ts";
+import {TaskRepository} from "../repository/task.repository.ts";
 import {ETaskStatus, ITask} from "../models/ITask.ts";
 
 export class CreateTaskService {

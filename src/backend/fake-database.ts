@@ -1,9 +1,13 @@
-import {ITask} from "./models/ITask.ts";
+import {ETaskStatus, ITask} from "./models/ITask.ts";
 
 export class Database {
     private connectionString: string;
-    private tasks: ITask[] = [];
-    private currentId = 0;
+    private tasks: ITask[] = [
+        { id: 1, name: 'task1', description: 'desc1', status: ETaskStatus.TODO },
+        { id: 2, name: 'task2', description: 'desc2', status: ETaskStatus.DOING },
+        { id: 3, name: 'task3', description: 'desc3', status: ETaskStatus.DONE },
+    ]
+    private currentId = 3;
 
     constructor(connectionString: string) {
         this.connectionString = connectionString
@@ -20,23 +24,18 @@ export class Database {
         return this
     }
 
-    async find() {
+    async find(status: string | null): Promise<ITask[]> {
         await this.sleep(100)
-        return [
-            {value: 'Test1'},
-            {value: 'Test2'},
-            {value: 'Test3'}
-        ]
+        return status ? this.tasks.filter((task: ITask) => task.status.toString() === status) : this.tasks;
     }
 
-    async insert(task: ITask) {
+    async insert(task: ITask): Promise<ITask> {
         await this.sleep(100)
         this.tasks.push({
             id: this.currentId + 1,
             ...task
         });
         ++this.currentId;
-        console.log(this.tasks);
         return this.tasks[this.tasks.length-1];
     }
 }
